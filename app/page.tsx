@@ -449,8 +449,8 @@ export default function LandingPage() {
                   className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-700 group-hover:scale-105"
                   style={{ backgroundImage: "url('/images/mainimg_01.jpg')" }}
                 ></div>
-                {/* 텍스트 가독성을 확보하는 네이비/블랙 반투명 그라데이션 필터 */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/90 via-[#0b1a30]/80 to-[#071120]/95 z-0"></div>
+                {/* 텍스트 가독성을 확보하는 네이비/블랙 반투명 그라데이션 필터 (사진 투과율 대폭 향상) */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/50 via-[#0b1a30]/35 to-[#071120]/60 z-0"></div>
 
                 <div className="relative z-10">
                   <span className="text-[#d4af37] text-xs font-bold uppercase tracking-widest">Brand Value</span>
