@@ -194,12 +194,28 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 bg-[#0b1a30] text-white shadow-premium border-b border-[#c5a85c]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* 로고 영역 */}
-          <div className="flex flex-col cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[#d4af37] font-bold text-xl sm:text-2xl tracking-wider font-serif">THE SHARP</span>
-              <span className="text-xs bg-[#c5a85c] text-[#0b1a30] px-1.5 py-0.5 rounded font-bold">부성</span>
+          <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <img 
+              src="/images/top_logo_wh.png" 
+              alt="부성동 포스코더샵 로고" 
+              className="h-11 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const parent = e.currentTarget.parentElement;
+                if (parent) {
+                  const fallback = parent.querySelector('.logo-fallback');
+                  if (fallback) fallback.classList.remove('hidden');
+                }
+              }}
+            />
+            {/* Fallback 텍스트 로고 */}
+            <div className="logo-fallback hidden flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[#d4af37] font-bold text-xl sm:text-2xl tracking-wider font-serif">THE SHARP</span>
+                <span className="text-xs bg-[#c5a85c] text-[#0b1a30] px-1.5 py-0.5 rounded font-bold">부성</span>
+              </div>
+              <span className="text-[10px] text-slate-300 tracking-widest mt-0.5 font-sans">천안 부성2구역 공동주택</span>
             </div>
-            <span className="text-[10px] text-slate-300 tracking-widest mt-0.5 font-sans">천안 부성2구역 공동주택</span>
           </div>
 
           {/* PC 메뉴 */}
@@ -860,12 +876,28 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-slate-800">
             {/* 푸터 로고 */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 text-white font-serif">
-                <span className="font-bold text-lg tracking-wider text-[#d4af37]">THE SHARP</span>
-                <span className="text-[10px] bg-[#c5a85c] text-[#0b1a30] px-1 rounded font-bold">부성</span>
+            <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <img 
+                src="/images/top_logo_wh.png" 
+                alt="부성동 포스코더샵 로고" 
+                className="h-10 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const parent = e.currentTarget.parentElement;
+                  if (parent) {
+                    const fallback = parent.querySelector('.footer-logo-fallback');
+                    if (fallback) fallback.classList.remove('hidden');
+                  }
+                }}
+              />
+              {/* Fallback 텍스트 로고 */}
+              <div className="footer-logo-fallback hidden flex flex-col">
+                <div className="flex items-center gap-1.5 text-white font-serif">
+                  <span className="font-bold text-lg tracking-wider text-[#d4af37]">THE SHARP</span>
+                  <span className="text-[10px] bg-[#c5a85c] text-[#0b1a30] px-1 rounded font-bold">부성</span>
+                </div>
+                <span className="text-[10px] text-slate-500 tracking-wider mt-0.5 font-sans">천안 부성2구역 공동주택 분양홍보관</span>
               </div>
-              <span className="text-[10px] text-slate-500 tracking-wider mt-0.5 font-sans">천안 부성2구역 공동주택 분양홍보관</span>
             </div>
 
             {/* 유용한 링크 */}
