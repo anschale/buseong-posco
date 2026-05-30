@@ -527,15 +527,24 @@ export default function LandingPage() {
               <span>단지 배치 구성도 (임시 안내 이미지)</span>
               <span className="text-[10px] text-slate-300 bg-slate-800 px-2 py-0.5 rounded font-normal">추후 공식 배치도 업데이트 예정</span>
             </div>
-            <div className="aspect-[21/9] bg-slate-900 flex flex-col items-center justify-center p-8 text-center text-white relative">
-              <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: "url('/images/complex_placeholder.jpg')" }}></div>
-              <div className="relative z-10 space-y-4 max-w-md">
-                <Building2 className="w-12 h-12 text-[#d4af37] mx-auto opacity-80" />
-                <h5 className="text-xl font-bold">쾌적한 지상에 차가 없는 자연 친화형 조경 설계</h5>
-                <p className="text-xs text-slate-300 leading-relaxed font-light">
+            {/* aspect-[21/9] 또는 aspect-[16/7]를 활용한 가로형 대형 비주얼 보드 */}
+            <div className="aspect-[16/7] bg-slate-950 flex items-center justify-center sm:justify-start p-6 sm:p-12 text-white relative overflow-hidden">
+              {/* 원본이 선명하게 노출되는 단지배치도 배경 (opacity-90) */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center opacity-90 transition-transform duration-1000 hover:scale-102 z-0" 
+                style={{ backgroundImage: "url('/images/mainimg_03.jpg')" }}
+              ></div>
+              {/* 이미지 밝기에 맞춘 은은한 조도 오버레이 필터 */}
+              <div className="absolute inset-0 bg-[#071120]/30 z-0"></div>
+              
+              {/* 좌측 정렬된 글래스모피즘 네이비 설명박스 (가독성 100% 보장 및 이미지 최대 노출) */}
+              <div className="relative z-10 space-y-4 max-w-md bg-[#0b1a30]/85 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-white/10 shadow-premium">
+                <Building2 className="w-8 h-8 text-[#d4af37]" />
+                <h5 className="text-lg sm:text-xl font-bold">쾌적한 지상에 차가 없는 자연 친화형 조경 설계</h5>
+                <p className="text-xs text-slate-200 leading-relaxed font-light">
                   넓은 동간 거리 확보를 통해 사생활 간섭을 최소화하고, 수변정원, 숲속 놀이터, 시그니처 티하우스 등 다채로운 테마 조경 공간이 구현됩니다.
                 </p>
-                <div className="text-[11px] text-[#d4af37] border border-[#d4af37]/30 px-3 py-1.5 rounded inline-block bg-[#0b1a30]/60">
+                <div className="text-[11px] text-[#d4af37] border border-[#d4af37]/30 px-3 py-1.5 rounded inline-block bg-[#071120]/60 w-full font-medium">
                   * 118㎡ 타입의 경우 전 세대에서 우수한 성성호수 조망이 확보될 수 있도록 동배치 특화설계가 추진 중입니다.
                 </div>
               </div>
