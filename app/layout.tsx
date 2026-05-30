@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "천안 부성2구역 공동주택 포스코더샵 분양안내",
     description: "성성호수공원 조망과 1호선 부성역 초역세권 프리미엄 대단지! 관심고객으로 등록해주시면 상세 청약 가이드를 즉시 발송해 드립니다.",
-    url: "https://buseong-thesharp.vercel.app", // 배포 도메인에 맞게 나중에 수정 가능
+    url: "https://buseong-posco-45do.vercel.app",
     siteName: "천안 부성2구역 공동주택 포스코더샵 홍보관",
     images: [
       {

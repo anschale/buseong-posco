@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api
 
-Sitemap: https://buseong-thesharp.vercel.app/sitemap.xml
+Sitemap: https://buseong-posco-45do.vercel.app/sitemap.xml
