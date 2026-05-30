@@ -194,11 +194,12 @@ export default function LandingPage() {
       <header className="absolute top-0 left-0 right-0 z-50 bg-transparent text-white border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
           {/* 로고 영역 */}
-          <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <div className="flex flex-col cursor-pointer justify-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src="/images/top_logo_wh.png" 
               alt="부성동 포스코더샵 로고" 
-              className="h-12 w-auto object-contain"
+              style={{ height: '34px', width: 'auto' }}
+              className="object-contain self-start"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 const parent = e.currentTarget.parentElement;
@@ -208,13 +209,15 @@ export default function LandingPage() {
                 }
               }}
             />
+            <span className="text-[14px] text-slate-200 tracking-wider mt-1.5 font-normal">천안 부성2구역 공동주택</span>
+            
             {/* Fallback 텍스트 로고 */}
             <div className="logo-fallback hidden flex flex-col">
               <div className="flex items-center gap-1.5">
                 <span className="text-[#d4af37] font-bold text-xl sm:text-2xl tracking-wider font-serif">THE SHARP</span>
                 <span className="text-xs bg-[#c5a85c] text-[#0b1a30] px-1.5 py-0.5 rounded font-bold">부성</span>
               </div>
-              <span className="text-[10px] text-slate-300 tracking-widest mt-0.5 font-sans">천안 부성2구역 공동주택</span>
+              <span className="text-[14px] text-slate-300 tracking-wider mt-1 font-normal">천안 부성2구역 공동주택</span>
             </div>
           </div>
 
@@ -936,11 +939,12 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-slate-800">
             {/* 푸터 로고 */}
-            <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="flex flex-col cursor-pointer justify-center" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <img 
                 src="/images/top_logo_wh.png" 
                 alt="부성동 포스코더샵 로고" 
-                className="h-10 w-auto object-contain"
+                style={{ height: '34px', width: 'auto' }}
+                className="object-contain self-start"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
                   const parent = e.currentTarget.parentElement;
@@ -950,13 +954,15 @@ export default function LandingPage() {
                   }
                 }}
               />
+              <span className="text-[14px] text-slate-500 tracking-wider mt-1.5 font-normal">천안 부성2구역 공동주택 분양홍보관</span>
+              
               {/* Fallback 텍스트 로고 */}
               <div className="footer-logo-fallback hidden flex flex-col">
                 <div className="flex items-center gap-1.5 text-white font-serif">
                   <span className="font-bold text-lg tracking-wider text-[#d4af37]">THE SHARP</span>
                   <span className="text-[10px] bg-[#c5a85c] text-[#0b1a30] px-1 rounded font-bold">부성</span>
                 </div>
-                <span className="text-[10px] text-slate-500 tracking-wider mt-0.5 font-sans">천안 부성2구역 공동주택 분양홍보관</span>
+                <span className="text-[14px] text-slate-500 tracking-wider mt-1 font-normal">천안 부성2구역 공동주택 분양홍보관</span>
               </div>
             </div>
 
