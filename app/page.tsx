@@ -443,18 +443,23 @@ export default function LandingPage() {
             {/* 개요 이미지 비주얼 영역 */}
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-[#d4af37] to-[#0b1a30] rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-              <div className="relative bg-[#0b1a30] rounded-2xl aspect-[4/3] flex flex-col justify-between p-8 text-white overflow-hidden shadow-lg border border-[#c5a85c]/20">
-                <div className="absolute top-0 right-0 p-8 opacity-10">
-                  <Building2 className="w-48 h-48" />
-                </div>
-                <div>
+              <div className="relative rounded-2xl aspect-[4/3] flex flex-col justify-between p-8 text-white overflow-hidden shadow-lg border border-[#c5a85c]/20">
+                {/* 카드 배경 이미지 및 호버 줌 효과 */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center z-0 transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: "url('/images/mainimg_01.jpg')" }}
+                ></div>
+                {/* 텍스트 가독성을 확보하는 네이비/블랙 반투명 그라데이션 필터 */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/90 via-[#0b1a30]/80 to-[#071120]/95 z-0"></div>
+
+                <div className="relative z-10">
                   <span className="text-[#d4af37] text-xs font-bold uppercase tracking-widest">Brand Value</span>
                   <h4 className="text-xl sm:text-2xl font-bold mt-2 font-serif">THE SHARP PREMIUM</h4>
-                  <p className="text-slate-300 text-sm mt-3 leading-relaxed font-light">
+                  <p className="text-slate-200 text-sm mt-3 leading-relaxed font-light">
                     포스코이앤씨의 주거 명작 브랜드 '더샵'은 차별화된 조경, 스마트 주거 케어 시스템, 고품격 커뮤니티 공간 설계를 통해 천안 부성지구에서 가치의 차이를 만듭니다.
                   </p>
                 </div>
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-700/60 text-center">
+                <div className="relative z-10 grid grid-cols-3 gap-4 pt-6 border-t border-slate-700/60 text-center col-span-3">
                   <div>
                     <div className="text-lg sm:text-2xl font-bold text-[#d4af37] font-serif">1,290</div>
                     <div className="text-[10px] sm:text-xs text-slate-400">총세대수</div>
