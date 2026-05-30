@@ -1,0 +1,43 @@
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 관심고객 등록 정보
+model Customer {
+  id             Int      @id @default(autoincrement())
+  name           String
+  phone          String
+  birthDate      String
+  address        String
+  interests      String   // "84㎡A, 102㎡A" 등 콤마 구분 문자열
+  privacyConsent Boolean  @default(true)
+  createdAt      DateTime @default(now())
+}
+
+// 홍보센터 새소식 (CRUD 게시판)
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  imageUrl  String?  // Base64 또는 이미지 웹주소
+  views     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 접속자 통계 로그
+model VisitorLog {
+  id        Int      @id @default(autoincrement())
+  ip        String   // IP 해싱값 또는 익명화된 IP
+  userAgent String
+  referrer  String?  // 유입 경로
+  keyword   String?  // 유입 검색어
+  path      String   // 접속한 페이지 경로 (예: "/")
+  createdAt DateTime @default(now())
+}

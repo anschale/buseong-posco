@@ -2,25 +2,52 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #0f172a;
+  --primary-navy: #0b1a30;
+  --primary-gold: #c5a85c;
+  --accent-gold: #d4af37;
+  --dark-bg: #071120;
+  --light-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-navy-900: var(--primary-navy);
+  --color-gold-500: var(--primary-gold);
+  --color-gold-400: var(--accent-gold);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Custom Utilities for smooth scroll & layouts */
+.bg-navy-gradient {
+  background: linear-gradient(135deg, #0b1a30 0%, #071120 100%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(90deg, #d4af37 0%, #f3e5ab 50%, #c5a85c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.border-gold {
+  border-color: rgba(197, 168, 92, 0.3);
+}
+
+.shadow-premium {
+  box-shadow: 0 10px 30px -10px rgba(11, 26, 48, 0.1);
+}
+
+.hover-gold-glow:hover {
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  border-color: rgba(212, 175, 55, 0.8);
 }
