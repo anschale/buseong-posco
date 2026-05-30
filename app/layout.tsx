@@ -38,8 +38,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full scroll-smooth">
       <head>
-        {/* 파비콘 및 iOS 웹 아이콘 선언 */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/* iOS 웹 클립 아이콘만 선언 (파비콘은 Next.js가 app/favicon.ico를 자동 로드) */}
         <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body className="min-h-full flex flex-col antialiased">
