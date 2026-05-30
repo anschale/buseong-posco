@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
   },
   other: {
-    "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE", // 네이버 서치어드바이저 소유권 확인 태그 들어갈 공간
+    "naver-site-verification": "cbf372c55283e16bcf24b4065d0cda5522a230c4",
   }
 };
 
