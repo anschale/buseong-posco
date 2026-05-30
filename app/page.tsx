@@ -188,17 +188,17 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans relative">
       
-      {/* 1. 상단 내비게이션 바 */}
-      <header className="sticky top-0 z-50 bg-[#0b1a30] text-white shadow-premium border-b border-[#c5a85c]/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      {/* 1. 상단 내비게이션 바 (투명 헤더 & 절대 배치) */}
+      <header className="absolute top-0 left-0 right-0 z-50 bg-transparent text-white border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
           {/* 로고 영역 */}
           <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src="/images/top_logo_wh.png" 
               alt="부성동 포스코더샵 로고" 
-              className="h-11 w-auto object-contain"
+              className="h-12 w-auto object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 const parent = e.currentTarget.parentElement;
@@ -219,7 +219,7 @@ export default function LandingPage() {
           </div>
 
           {/* PC 메뉴 */}
-          <nav className="hidden md:flex space-x-8 text-sm font-semibold tracking-wide">
+          <nav className="hidden md:flex space-x-10 text-sm sm:text-base font-semibold tracking-wide">
             {['overview', 'complex', 'units', 'news', 'register'].map((menu) => {
               const menuNames: { [key: string]: string } = {
                 overview: '사업개요',
@@ -232,7 +232,7 @@ export default function LandingPage() {
                 <button
                   key={menu}
                   onClick={() => scrollToSection(menu)}
-                  className="hover:text-[#d4af37] transition-colors duration-200 cursor-pointer text-slate-200"
+                  className="hover:text-[#d4af37] transition-all duration-200 cursor-pointer text-slate-100 font-medium hover:scale-105"
                 >
                   {menuNames[menu]}
                 </button>
@@ -240,15 +240,22 @@ export default function LandingPage() {
             })}
           </nav>
 
-          {/* PC 우측 통화연결 액션 버튼 */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* PC 우측 카카오톡 문의 & 관심고객등록 CTA */}
+          <div className="hidden md:flex items-center gap-3">
             <a 
-              href="tel:1688-0000" 
-              className="flex items-center gap-2 border border-[#d4af37]/60 text-[#d4af37] px-4 py-2 rounded-full hover:bg-[#d4af37] hover:text-[#0b1a30] transition-all duration-300 text-sm font-bold shadow-sm"
+              href="https://open.kakao.com/o/gw5wPhxi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#fee500] text-[#191919] px-5 py-2.5 rounded-full hover:bg-[#e6cf00] transition-all duration-300 text-xs sm:text-sm font-bold shadow-md hover:scale-105"
             >
-              <Phone className="w-4 h-4" />
-              <span>문의전화 연결</span>
+              <span>카카오톡 문의</span>
             </a>
+            <button 
+              onClick={() => scrollToSection('register')}
+              className="flex items-center gap-2 border border-[#d4af37] bg-[#0b1a30]/80 text-[#d4af37] px-5 py-2.5 rounded-full hover:bg-[#d4af37] hover:text-[#0b1a30] transition-all duration-300 text-xs sm:text-sm font-bold shadow-md hover:scale-105"
+            >
+              <span>관심고객 등록</span>
+            </button>
           </div>
 
           {/* 모바일 메뉴 토글 버튼 */}
@@ -264,7 +271,7 @@ export default function LandingPage() {
 
         {/* 모바일 전체 화면 드롭다운 내비게이션 */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#071120] border-t border-[#c5a85c]/20 py-4 px-6 space-y-4">
+          <div className="md:hidden bg-[#071120]/95 backdrop-blur-md border-t border-white/10 py-4 px-6 space-y-4">
             {['overview', 'complex', 'units', 'news', 'register'].map((menu) => {
               const menuNames: { [key: string]: string } = {
                 overview: '사업개요',
@@ -283,19 +290,28 @@ export default function LandingPage() {
                 </button>
               );
             })}
-            <a 
-              href="tel:1688-0000" 
-              className="flex items-center justify-center gap-2 bg-[#d4af37] text-[#0b1a30] py-3 rounded-lg font-bold text-sm tracking-wide shadow-md"
-            >
-              <Phone className="w-4 h-4" />
-              <span>문의전화 연결</span>
-            </a>
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <a 
+                href="https://open.kakao.com/o/gw5wPhxi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1 bg-[#fee500] text-[#191919] py-3 rounded-lg font-bold text-xs shadow-md"
+              >
+                <span>카카오톡 문의</span>
+              </a>
+              <button 
+                onClick={() => scrollToSection('register')}
+                className="flex items-center justify-center gap-1 bg-[#d4af37] text-[#0b1a30] py-3 rounded-lg font-bold text-xs shadow-md"
+              >
+                <span>관심고객 등록</span>
+              </button>
+            </div>
           </div>
         )}
       </header>
 
-      {/* 2. 히어로 (메인 비주얼) 섹션 */}
-      <section className="relative bg-[#071120] text-white overflow-hidden py-28 sm:py-36 border-b border-[#c5a85c]/10 min-h-[65vh] flex items-center">
+      {/* 2. 히어로 (메인 비주얼) 섹션 (100vh 풀 화면) */}
+      <section className="relative bg-[#071120] text-white overflow-hidden h-screen flex items-center justify-center">
         {/* 풀사이즈 비디오 백그라운드 */}
         <video 
           autoPlay 
@@ -307,20 +323,20 @@ export default function LandingPage() {
         >
           <source src="/main.mp4" type="video/mp4" />
         </video>
-        {/* 가독성을 높이기 위한 반투명 럭셔리 네이비 그라데이션 오버레이 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/85 via-[#071120]/75 to-[#0b1a30]/90 z-0"></div>
+        {/* 가독성을 높이기 위한 20% 반투명 네이비 오버레이 마스크 */}
+        <div className="absolute inset-0 bg-[#071120]/20 z-0"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="text-center space-y-6 max-w-4xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#c5a85c]/20 text-[#d4af37] border border-[#c5a85c]/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center mt-12">
+          <div className="space-y-6 max-w-4xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#c5a85c]/30 text-[#d4af37] border border-[#c5a85c]/40 backdrop-blur-sm">
               <Calendar className="w-3.5 h-3.5" />
               <span>2026년 9월 분양예정단지 사전 안내</span>
             </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight drop-shadow-md">
               천안 북부의 뉴 랜드마크<br />
-              <span className="gold-gradient-text block mt-2">천안 부성2구역 포스코더샵</span>
+              <span className="gold-gradient-text block mt-3">천안 부성2구역 포스코더샵</span>
             </h1>
-            <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-base sm:text-xl text-slate-100 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-lg">
               1,290세대 초대형 프리미엄 명품 단지! 성성호수공원의 독보적인 남향 호수조망 특권과 지하철 1호선 부성역(신설예정)의 눈부신 미래가치를 선점하십시오.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
@@ -333,14 +349,58 @@ export default function LandingPage() {
               </button>
               <button
                 onClick={() => scrollToSection('overview')}
-                className="w-full sm:w-auto bg-slate-800/80 hover:bg-slate-700/80 text-white border border-slate-700 px-8 py-4 rounded-lg text-base font-bold transition-all duration-300 cursor-pointer"
+                className="w-full sm:w-auto bg-slate-900/60 hover:bg-slate-800/80 text-white border border-white/30 backdrop-blur-sm px-8 py-4 rounded-lg text-base font-bold transition-all duration-300 cursor-pointer"
               >
                 단지 세부정보 조회
               </button>
             </div>
           </div>
         </div>
+
+        {/* 하단 중앙 애니메이션 스크롤 다운 마우스 버튼 */}
+        <div 
+          onClick={() => scrollToSection('overview')}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center gap-2 cursor-pointer text-slate-200 hover:text-[#d4af37] transition-colors duration-200"
+        >
+          <span className="text-[9px] sm:text-[10px] tracking-[0.25em] font-medium uppercase text-slate-300">SCROLL DOWN</span>
+          <div className="w-[20px] h-[36px] border-2 border-slate-300 rounded-full flex justify-center p-[4px] hover:border-[#d4af37] transition-colors duration-200">
+            <div className="w-[3px] h-[6px] bg-slate-300 rounded-full animate-scroll-bounce"></div>
+          </div>
+        </div>
       </section>
+
+      {/* 우측 사이드바 고정 플로팅 CTAs (카카오톡, 관심고객등록, TOP 버튼) */}
+      <div className="floating-cta-container">
+        {/* 1. 카카오톡 문의 (옐로우) */}
+        <a 
+          href="https://open.kakao.com/o/gw5wPhxi" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="floating-cta-btn bg-[#fee500] hover:bg-[#e6cf00] group"
+          title="카카오톡 오픈채팅 문의"
+        >
+          <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" alt="카톡" className="w-6 h-6 object-contain" />
+        </a>
+
+        {/* 2. 관심고객등록 (딥네이비 / 골드 테두리) */}
+        <button 
+          onClick={() => scrollToSection('register')}
+          className="floating-cta-btn bg-[#0b1a30] hover:bg-[#d4af37] border border-[#d4af37] text-white hover:text-[#0b1a30] group flex flex-col items-center justify-center p-1"
+          title="관심고객 등록하기"
+        >
+          <CheckCircle2 className="w-5 h-5 text-[#d4af37] group-hover:text-[#0b1a30]" />
+          <span className="text-[7px] font-bold mt-0.5 tracking-tighter">관심등록</span>
+        </button>
+
+        {/* 3. TOP 위로가기 버튼 */}
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="floating-cta-btn bg-slate-800/90 hover:bg-slate-700 text-white"
+          title="맨 위로 스크롤"
+        >
+          <ChevronRight className="w-5 h-5 rotate-270" />
+        </button>
+      </div>
 
       {/* 3. 사업개요 섹션 */}
       <section id="overview" className="py-20 bg-white">
