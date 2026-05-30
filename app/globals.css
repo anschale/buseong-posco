@@ -38,6 +38,7 @@
   --color-navy-900: var(--primary-navy);
   --color-gold-500: var(--primary-gold);
   --color-gold-400: var(--accent-gold);
+  --font-sans: 'GmarketSans', 'Gmarket Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 body {
