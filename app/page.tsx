@@ -279,9 +279,22 @@ export default function LandingPage() {
       </header>
 
       {/* 2. 히어로 (메인 비주얼) 섹션 */}
-      <section className="relative bg-navy-gradient text-white overflow-hidden py-24 sm:py-32 border-b border-[#c5a85c]/10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent opacity-60 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <section className="relative bg-[#071120] text-white overflow-hidden py-28 sm:py-36 border-b border-[#c5a85c]/10 min-h-[65vh] flex items-center">
+        {/* 풀사이즈 비디오 백그라운드 */}
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          poster="/og-image.png"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+        >
+          <source src="/main.mp4" type="video/mp4" />
+        </video>
+        {/* 가독성을 높이기 위한 반투명 럭셔리 네이비 그라데이션 오버레이 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a30]/85 via-[#071120]/75 to-[#0b1a30]/90 z-0"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#c5a85c]/20 text-[#d4af37] border border-[#c5a85c]/30">
               <Calendar className="w-3.5 h-3.5" />
