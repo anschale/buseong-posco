@@ -96,6 +96,23 @@ export default function AdminDashboardPage() {
     imageUrl: ''
   });
 
+  // 모달 상태 (고객 수정용)
+  const [customerModalOpen, setCustomerModalOpen] = useState(false);
+  const [currentCustomerItem, setCurrentCustomerItem] = useState<{
+    id?: number;
+    name: string;
+    phone: string;
+    birthDate: string;
+    address: string;
+    interests: string;
+  }>({
+    name: '',
+    phone: '',
+    birthDate: '',
+    address: '',
+    interests: ''
+  });
+
   // 로딩 및 에러
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
@@ -269,6 +286,55 @@ export default function AdminDashboardPage() {
     } catch (err) {
       console.error(err);
       alert('삭제 중 통신 오류가 발생했습니다.');
+    }
+  };
+
+  // 6.5 관심고객 수정 및 삭제
+  const handleSaveCustomer = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setActionLoading(true);
+    try {
+      if (!currentCustomerItem.id) return;
+      const res = await fetch(`/api/admin/customers/${currentCustomerItem.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(currentCustomerItem),
+      });
+      const json = await res.json();
+      if (json.success) {
+        alert('고객 정보가 수정되었습니다.');
+        setCustomerModalOpen(false);
+        loadAllData();
+      } else {
+        alert(json.error || '수정 중 오류가 발생했습니다.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('수정 중 통신 오류가 발생했습니다.');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleDeleteCustomer = async (id: number) => {
+    if (!confirm('정말로 이 고객 정보를 삭제하시겠습니까?')) return;
+    setActionLoading(true);
+    try {
+      const res = await fetch(`/api/admin/customers/${id}`, {
+        method: 'DELETE'
+      });
+      const json = await res.json();
+      if (json.success) {
+        alert('고객 정보가 삭제되었습니다.');
+        loadAllData();
+      } else {
+        alert(json.error || '삭제 중 오류가 발생했습니다.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('삭제 중 통신 오류가 발생했습니다.');
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -544,6 +610,7 @@ export default function AdminDashboardPage() {
                             <th className="px-4 py-3.5">거주지 (동까지)</th>
                             <th className="px-4 py-3.5">관심평형대</th>
                             <th className="px-4 py-3.5 text-center">등록일자</th>
+                            <th className="px-4 py-3.5 text-center">관리</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 bg-white">
@@ -556,6 +623,16 @@ export default function AdminDashboardPage() {
                               <td className="px-4 py-3 text-slate-600">{c.address}</td>
                               <td className="px-4 py-3"><span className="bg-blue-50 text-blue-700 px-2 py-0.5 rounded font-bold">{c.interests}</span></td>
                               <td className="px-4 py-3 text-center text-slate-400">{new Date(c.createdAt).toLocaleDateString('ko-KR')}</td>
+                              <td className="px-4 py-3 text-center">
+                                <div className="flex items-center justify-center gap-2">
+                                  <button onClick={() => { setCurrentCustomerItem(c); setCustomerModalOpen(true); }} className="text-blue-600 hover:text-blue-800" title="수정">
+                                    <Edit3 className="w-4 h-4" />
+                                  </button>
+                                  <button onClick={() => handleDeleteCustomer(c.id)} className="text-red-500 hover:text-red-700" title="삭제">
+                                    <Trash2 className="w-4 h-4" />
+                                  </button>
+                                </div>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -726,6 +803,53 @@ export default function AdminDashboardPage() {
                 >
                   {actionLoading && <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white"></div>}
                   <span>{currentNewsItem.id ? '수정완료' : '등록저장'}</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 관심고객 수정 모달 */}
+      {customerModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-xl w-full overflow-hidden border border-slate-200">
+            <form onSubmit={handleSaveCustomer} className="space-y-4">
+              <div className="bg-[#0b1a30] text-white p-5 flex items-center justify-between">
+                <h3 className="font-bold text-base">관심고객 정보 수정</h3>
+                <button type="button" onClick={() => setCustomerModalOpen(false)} className="text-slate-300 hover:text-white text-xs bg-slate-800 px-2.5 py-1 rounded">닫기</button>
+              </div>
+              <div className="p-6 space-y-4 text-xs sm:text-sm">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block font-bold text-slate-700">이름</label>
+                    <input type="text" value={currentCustomerItem.name} onChange={(e) => setCurrentCustomerItem({...currentCustomerItem, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-[#d4af37]" required />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block font-bold text-slate-700">연락처</label>
+                    <input type="text" value={currentCustomerItem.phone} onChange={(e) => setCurrentCustomerItem({...currentCustomerItem, phone: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-[#d4af37]" required />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block font-bold text-slate-700">생년월일</label>
+                    <input type="text" value={currentCustomerItem.birthDate} onChange={(e) => setCurrentCustomerItem({...currentCustomerItem, birthDate: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-[#d4af37]" />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block font-bold text-slate-700">관심평형</label>
+                    <input type="text" value={currentCustomerItem.interests} onChange={(e) => setCurrentCustomerItem({...currentCustomerItem, interests: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-[#d4af37]" />
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <label className="block font-bold text-slate-700">거주지(동까지)</label>
+                  <input type="text" value={currentCustomerItem.address} onChange={(e) => setCurrentCustomerItem({...currentCustomerItem, address: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-[#d4af37]" />
+                </div>
+              </div>
+              <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex justify-end gap-3 text-xs">
+                <button type="button" onClick={() => setCustomerModalOpen(false)} className="border border-slate-300 hover:bg-slate-100 text-slate-600 px-4 py-2.5 rounded-lg font-bold">취소</button>
+                <button type="submit" disabled={actionLoading} className="bg-[#0b1a30] hover:bg-[#d4af37] text-white px-5 py-2.5 rounded-lg font-bold flex items-center gap-1.5">
+                  {actionLoading && <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white"></div>}
+                  <span>수정완료</span>
                 </button>
               </div>
             </form>

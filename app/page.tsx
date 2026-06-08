@@ -187,6 +187,22 @@ export default function LandingPage() {
     }
   };
 
+  // 새소식 클릭 시 조회수 증가 및 모달 오픈
+  const handleNewsClick = async (post: NewsPost) => {
+    setSelectedPost(post);
+    try {
+      const res = await fetch(`/api/news/${post.id}/view`, { method: 'POST' });
+      const json = await res.json();
+      if (json.success && json.data) {
+        const updatedViews = json.data.views;
+        setSelectedPost((prev) => prev?.id === post.id ? { ...prev, views: updatedViews } : prev);
+        setNewsList((prev) => prev.map(p => p.id === post.id ? { ...p, views: updatedViews } : p));
+      }
+    } catch (err) {
+      console.error('Failed to increment views:', err);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans relative">
       
@@ -669,7 +685,7 @@ export default function LandingPage() {
               {newsList.map((post) => (
                 <article 
                   key={post.id} 
-                  onClick={() => setSelectedPost(post)}
+                  onClick={() => handleNewsClick(post)}
                   className="bg-white rounded-xl shadow-premium border border-slate-200 overflow-hidden flex flex-col justify-between hover:border-[#d4af37] transition-all duration-300 group cursor-pointer"
                 >
                   <div className="p-6 space-y-4">
