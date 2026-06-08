@@ -3,10 +3,11 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id, 10);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id, 10);
     if (isNaN(id)) {
       return NextResponse.json({ error: '유효하지 않은 게시글 ID입니다.' }, { status: 400 });
     }

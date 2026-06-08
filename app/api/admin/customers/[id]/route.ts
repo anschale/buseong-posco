@@ -5,7 +5,7 @@ import { verifyAdminSession } from '@/lib/auth';
 // 고객 수정
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const isAdmin = await verifyAdminSession();
@@ -13,7 +13,8 @@ export async function PUT(
       return NextResponse.json({ error: '관리자 권한이 없습니다.' }, { status: 401 });
     }
 
-    const id = parseInt(params.id, 10);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id, 10);
     if (isNaN(id)) {
       return NextResponse.json({ error: '유효하지 않은 고객 ID입니다.' }, { status: 400 });
     }
@@ -45,7 +46,7 @@ export async function PUT(
 // 고객 삭제
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const isAdmin = await verifyAdminSession();
@@ -53,7 +54,8 @@ export async function DELETE(
       return NextResponse.json({ error: '관리자 권한이 없습니다.' }, { status: 401 });
     }
 
-    const id = parseInt(params.id, 10);
+    const resolvedParams = await params;
+    const id = parseInt(resolvedParams.id, 10);
     if (isNaN(id)) {
       return NextResponse.json({ error: '유효하지 않은 고객 ID입니다.' }, { status: 400 });
     }
